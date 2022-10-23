@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
     <head>
         <meta charset="utf-8">
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -34,24 +33,22 @@
         * License: https://bootstrapmade.com/license/
         ======================================================== -->
     </head>
+    <body>
 
+        <main id="main">
+            @yield('content')
+        </main>
+
+        <!-- Vendor JS Files -->
+        <script src="{{ asset('assets/vendor/purecounter/purecounter_vanilla.js') }}"></script>
+        <script src="{{ asset('assets/vendor/aos/aos.js') }}"></script>
+        <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+        <script src="{{ asset('assets/vendor/glightbox/js/glightbox.min.js') }}"></script>
+        <script src="{{ asset('assets/vendor/isotope-layout/isotope.pkgd.min.js') }}"></script>
+        <script src="{{ asset('assets/vendor/swiper/swiper-bundle.min.js') }}"></script>
+        <script src="{{ asset('assets/vendor/php-email-form/validate.js') }}"></script>
+
+        <!-- Template Main JS File -->
+        <script src="{{ asset('assets/js/main.js') }}"></script>
+    </body>
 </html>
-
-<body>
-
-    <main id="main">
-        @yield('content')
-    </main>
-
-    <!-- Vendor JS Files -->
-    <script src="{{ asset('assets/vendor/purecounter/purecounter_vanilla.js') }}"></script>
-    <script src="{{ asset('assets/vendor/aos/aos.js') }}"></script>
-    <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/glightbox/js/glightbox.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/isotope-layout/isotope.pkgd.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/swiper/swiper-bundle.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/php-email-form/validate.js') }}"></script>
-
-    <!-- Template Main JS File -->
-    <script src="{{ asset('assets/js/main.js') }}"></script>
-</body>
