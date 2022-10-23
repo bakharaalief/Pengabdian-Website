@@ -34,13 +34,6 @@ class UserLevelSeeder extends Seeder
 
         DB::table('user_level')->insert([
             'id' => 3,
-            'name' => 'guru tetap',
-            'created_at' => $mytime,
-            'updated_at' => $mytime,
-        ]);
-
-        DB::table('user_level')->insert([
-            'id' => 4,
             'name' => 'sukarelawan',
             'created_at' => $mytime,
             'updated_at' => $mytime,

@@ -27,5 +27,25 @@ class UserSeeder extends Seeder
             'created_at' => $mytime,
             'updated_at' => $mytime,
         ]);
+
+        DB::table('users')->insert([
+            'id' => 2,
+            'name' => 'guru',
+            'username' => 'guru123',
+            'password' => bcrypt('guru123'),
+            'user_level' => 2,
+            'created_at' => $mytime,
+            'updated_at' => $mytime,
+        ]);
+
+        DB::table('users')->insert([
+            'id' => 3,
+            'name' => 'sukarelawan',
+            'username' => 'sukarelawan123',
+            'password' => bcrypt('sukarelawan123'),
+            'user_level' => 3,
+            'created_at' => $mytime,
+            'updated_at' => $mytime,
+        ]);
     }
 }
