@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\NormalController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -16,10 +18,11 @@ use Illuminate\Support\Facades\Route;
 
 // Route::get('/', fn () => dd( asset('assets/img/favicon.png')) );
 
-Route::get('/', function () {
-    return view('welcome');
+//normal route
+Route::prefix('/')->group(function () {
+    Route::get('/', [NormalController::class, 'index'])->name('normal.home');
 });
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
