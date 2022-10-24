@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class NormalController extends Controller
+class UserController extends Controller
 {
     function index()
     {
-        return view('normal.welcome');
+        return view('user.index');
     }
 }

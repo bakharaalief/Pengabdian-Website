@@ -2,12 +2,11 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\User;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class CheckUserLevel
+class CheckUserAdmin
 {
     /**
      * Handle an incoming request.
@@ -19,10 +18,10 @@ class CheckUserLevel
     public function handle(Request $request, Closure $next)
     {
         // if user level is admin
-        if (Auth::user() && Auth::user()->level == 1) {
+        if (Auth::user() && Auth::user()->user_level === 1) {
             return $next($request);
         } 
 
-        return redirect('normal.home');
+        return redirect()->route('normal.home');
     }
 }
