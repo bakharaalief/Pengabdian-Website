@@ -27,6 +27,30 @@
                         <p>User</p>
                     </a>
                 </li>
+
+                <!-- murid button -->
+                <li class="nav-item">
+                    <a href="{{ route('student.index') }}" class="nav-link">
+                        <i class="nav-icon fas fa-lg fa-users mr-2"></i>
+                        <p>Murid</p>
+                    </a>
+                </li>
+
+                <!-- kelas button -->
+                <li class="nav-item">
+                    <a href="{{ route('class.index') }}" class="nav-link">
+                        <i class="nav-icon fas fa-lg fa-graduation-cap mr-2"></i>
+                        <p>Kelas</p>
+                    </a>
+                </li>
+
+                <!-- absensi button -->
+                <li class="nav-item">
+                    <a href="{{ route('user.index') }}" class="nav-link">
+                        <i class="nav-icon fas fa-lg fa-calendar mr-3"></i>
+                        <p>Absensi</p>
+                    </a>
+                </li>
             </nav>
         </ul>
     </div>

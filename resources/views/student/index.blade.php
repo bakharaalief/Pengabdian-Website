@@ -15,7 +15,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">User</h1>
+                        <h1 class="m-0">Murid</h1>
                     </div>
                 </div>
             </div><!-- /.container-fluid -->
@@ -40,10 +40,7 @@
                                 <table id="example2" class="table table-bordered table-hover">
                                     <thead>
                                         <tr>
-                                            <th>Nama</th>
-                                            <th>Username</th>
-                                            <th>Password</th>
-                                            <th>Jabatan</th>
+                                            <th>Kelas</th>
                                             <th>Edit</th>
                                             <th>Delete</th>
                                         </tr>
@@ -51,9 +48,6 @@
                                     <tbody>
                                         <tr>
                                             <td>Username</td>
-                                            <td>Username123</td>
-                                            <td>Username123</td>
-                                            <td>Admin</td>
                                             <td>
                                                 <button class="btn btn-warning">
                                                     Edit
