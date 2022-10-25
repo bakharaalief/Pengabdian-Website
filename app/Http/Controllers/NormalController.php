@@ -8,6 +8,6 @@ class NormalController extends Controller
 {
     function index()
     {
-        return view('layouts.normal.welcome');
+        return view('normal.welcome');
     }
 }
