@@ -42,18 +42,17 @@
                                         <tr>
                                             <th>Nama</th>
                                             <th>Username</th>
-                                            <th>Password</th>
                                             <th>Jabatan</th>
                                             <th>Edit</th>
                                             <th>Delete</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @foreach ($users as $user)
                                         <tr>
-                                            <td>Username</td>
-                                            <td>Username123</td>
-                                            <td>Username123</td>
-                                            <td>Admin</td>
+                                            <td>{{ $user->name }}</td>
+                                            <td>{{ $user->username }}</td>
+                                            <td>{{ $user->getLevel->name }}</td>
                                             <td>
                                                 <button class="btn btn-warning">
                                                     Edit
@@ -65,6 +64,7 @@
                                                 </button>
                                             </td>
                                         </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
