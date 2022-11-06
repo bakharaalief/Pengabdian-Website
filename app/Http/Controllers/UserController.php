@@ -98,9 +98,6 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         try{
-            //check data if exist in db
-            $cekAda = User::where('username', $request['username'])->first();
-
             if($request['password'] == ''){
                 User::where('id', $id)->update([
                     'name' => $request['name'],
@@ -133,7 +130,7 @@ class UserController extends Controller
     public function destroy($id)
     {
         try {
-            //update data to delete false
+            //update data to delete
             User::where('id', $id)->delete();
 
             //redirect to index
