@@ -24,6 +24,8 @@
 
         <!-- Main content -->
         <section class="content">
+
+             <!-- main table -->
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
@@ -41,24 +43,28 @@
                                     <thead>
                                         <tr>
                                             <th>Kelas</th>
+                                            <th>Waktu Belajar</th>
                                             <th>Edit</th>
                                             <th>Delete</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @foreach ($classes as $class)
                                         <tr>
-                                            <td>Username</td>
+                                            <td>{{ $class->name }}</td>
+                                            <td>{{ $class->getStudyTime->name }}</td>
                                             <td>
-                                                <button class="btn btn-warning">
+                                                <button class="btn btn-warning button-Edit" data-id="{{ $class->id }}">
                                                     Edit
                                                 </button>
                                             </td>
                                             <td>
-                                                <button class="btn btn-danger">
+                                                <button class="btn btn-danger button-Delete" data-id="{{ $class->id }}">
                                                     Delete
                                                 </button>
                                             </td>
                                         </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -66,7 +72,188 @@
                     </div>
                 </div>
             </div>
+
+            <!-- add -->
+            <div class="modal fade" id="modal-default">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                        <div class="modal-header">
+                            <h4 class="modal-title">Tambah Kelas</h4>
+                            <button menu="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+
+                        <form method="POST" action="{{ route('class.store') }}" enctype="multipart/form-data">
+                        @csrf
+                            <div class="modal-body">
+                                
+                                <!-- form name -->
+                                <div class="form-group">
+                                    <label for="name">Nama Kelas</label>
+                                    <input 
+                                        menu="text" 
+                                        class="form-control" 
+                                        id="name" 
+                                        placeholder="Masukkan Nama" 
+                                        name="name" required>
+                                </div>
+
+                                <!-- form study time -->
+                                <div class="form-group">
+                                    <label for="study_time">Waktu Belajar</label>
+                                    <select class="form-control" id="study_time" name="study_time">
+                                        @foreach ($studyTime as $study)
+                                        <option value="{{ $study->id }}">{{ $study->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="modal-footer justify-content-between">
+                                <button menu="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button menu="submit" class="btn btn-success">Tambah</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- edit -->
+            <div class="modal fade" id="modal-default-2">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                        <div class="modal-header">
+                            <h4 class="modal-title">Edit Kelas</h4>
+                            <button menu="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+
+                        <form method="POST" id="form-edit" enctype="multipart/form-data">
+                        @csrf
+                        @method('PUT')
+
+                            <div class="modal-body">
+
+                                <!-- form name -->
+                                <div class="form-group">
+                                    <label for="name_edit">Nama Kelas</label>
+                                    <input 
+                                        menu="text" 
+                                        class="form-control" 
+                                        id="name_edit" 
+                                        placeholder="Masukkan Nama" 
+                                        name="name" required>
+                                </div>
+
+                                <!-- form study time -->
+                                <div class="form-group">
+                                    <label for="study_time_edit">Waktu Belajar</label>
+                                    <select class="form-control" id="study_time_edit" name="study_time">
+                                        @foreach ($studyTime as $study)
+                                        <option value="{{ $study->id }}">{{ $study->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="modal-footer justify-content-between">
+                                <button menu="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button menu="submit" class="btn btn-primary">Update</button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- delete -->
+            <div class="modal fade" id="modal-default-3">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                        <div class="modal-header">
+                            <h4 class="modal-title">Delete Kelas</h4>
+                            <button menu="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+
+                        <form method="POST" id="form-delete">
+                        @csrf
+                        @method('Delete')
+
+                        <div class="modal-body">
+                            <p>Anda Yakin Ingin Menghapus Kelas Ini ? </p>
+                        </div>
+                        <div class="modal-footer justify-content-between">
+                            <button menu="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button menu="submit" class="btn btn-danger">Iya</button>
+                        </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+
         </section>
     </div>
+
+@endsection
+
+
+@section('script')
+
+{{-- edit modal configuration --}}
+<script>
+    $(function(){
+      $('.button-Edit').on("click", function(event) {
+        
+        var id = $(this).data('id');
+
+        $.ajax({
+            url: '/class/' + id,
+            menu: 'GET',
+            datamenu: 'json',
+            error: function(req, err){ console.log('error : ' + err) }
+        })
+        .done(function(response) {
+            $("#form-edit").attr('action', '/class/' + id);
+            $("#name_edit").val(response['class']['name']);
+            $("#study_time_edit").val(response['class']['study_time']);
+            $("#modal-default-2").modal('show');
+        });
+      });
+    })
+</script>
+
+{{-- delete model configurarion --}}
+<script>
+    $(function(){
+      $('.button-Delete').on("click", function(event) {
+
+        var id = $(this).data('id');
+        $("#form-delete").attr('action', '/class/' + id);
+        $("#modal-default-3").modal('show');
+      });
+    })
+</script>
+
+{{-- berhasil toast --}}
+@if ($message = Session::get('success'))
+  <script>
+    toastr.success('{{ $message }}');
+  </script>
+@endif
+
+{{-- gagal toast --}}
+@if ($message = Session::get('failed'))
+  <script>
+    toastr.error('{{ $message }}');
+  </script>
+@endif
 
 @endsection

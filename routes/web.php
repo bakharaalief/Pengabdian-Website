@@ -33,9 +33,7 @@ Route::resource('/user', UserController::class)->middleware(['isAdmin', 'auth'])
 Route::resource('/student', StudentController::class)->middleware(['isGuru', 'auth']);
 
 //class route
-Route::prefix('/class')->middleware(['isGuru', 'auth'])->group(function () {
-    Route::get('/', [ClassController::class, 'index'])->name('class.index');
-});
+Route::resource('/class', ClassController::class)->middleware(['isGuru', 'auth']);
 
 Auth::routes();
 
