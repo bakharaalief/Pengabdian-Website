@@ -33,7 +33,7 @@
                         <!-- small box -->
                         <div class="small-box bg-success">
                             <div class="inner">
-                                <h3>5</h3>
+                                <h3>53</h3>
                                 <p>Murid</p>
                             </div>
                             <div class="icon">
