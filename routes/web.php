@@ -3,6 +3,7 @@
 use App\Http\Controllers\ClassController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NormalController;
+use App\Http\Controllers\StudentClassController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
@@ -34,6 +35,9 @@ Route::resource('/student', StudentController::class)->middleware(['isGuru', 'au
 
 //class route
 Route::resource('/class', ClassController::class)->middleware(['isGuru', 'auth']);
+
+//class route
+Route::resource('/detail-class', StudentClassController::class)->middleware(['isGuru', 'auth']);
 
 Auth::routes();
 

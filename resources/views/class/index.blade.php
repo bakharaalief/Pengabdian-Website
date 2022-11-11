@@ -44,6 +44,8 @@
                                         <tr>
                                             <th>Kelas</th>
                                             <th>Waktu Belajar</th>
+                                            <th>Tahun Ajaran</th>
+                                            <th>Detail</th>
                                             <th>Edit</th>
                                             <th>Delete</th>
                                         </tr>
@@ -53,6 +55,10 @@
                                         <tr>
                                             <td>{{ $class->name }}</td>
                                             <td>{{ $class->getStudyTime->name }}</td>
+                                            <td>{{ $class->tahun_ajaran }}</td>
+                                            <td>
+                                                <a href="/detail-class/{{ $class->id }}" class="btn btn-info">Detail</a>
+                                            </td>
                                             <td>
                                                 <button class="btn btn-warning button-Edit" data-id="{{ $class->id }}">
                                                     Edit
@@ -109,6 +115,17 @@
                                         @endforeach
                                     </select>
                                 </div>
+
+                                <!-- form tahun ajaran -->
+                                <div class="form-group">
+                                    <label for="tahun_ajaran">Tahun Ajaran</label>
+                                    <input 
+                                        menu="text" 
+                                        class="form-control" 
+                                        id="tahun_ajaran" 
+                                        placeholder="Masukkan Tahun Ajaran" 
+                                        name="tahun_ajaran" required>
+                                </div>
                             </div>
 
                             <div class="modal-footer justify-content-between">
@@ -157,6 +174,17 @@
                                         <option value="{{ $study->id }}">{{ $study->name }}</option>
                                         @endforeach
                                     </select>
+                                </div>
+
+                                <!-- form tahun ajaran -->
+                                <div class="form-group">
+                                    <label for="tahun_ajaran_edit">Tahun Ajaran</label>
+                                    <input 
+                                        menu="text" 
+                                        class="form-control" 
+                                        id="tahun_ajaran_edit" 
+                                        placeholder="Masukkan Tahun Ajaran" 
+                                        name="tahun_ajaran" required>
                                 </div>
                             </div>
 
@@ -224,6 +252,7 @@
             $("#form-edit").attr('action', '/class/' + id);
             $("#name_edit").val(response['class']['name']);
             $("#study_time_edit").val(response['class']['study_time']);
+            $("#tahun_ajaran_edit").val(response['class']['tahun_ajaran']);
             $("#modal-default-2").modal('show');
         });
       });

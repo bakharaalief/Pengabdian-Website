@@ -14,6 +14,7 @@ class Kelas extends Model
     protected $fillable = [
         'name',
         'study_time',
+        'tahun_ajaran',
     ];
 
     public function getStudyTime()

@@ -22,6 +22,7 @@ class ClassesSeeder extends Seeder
             'id' => 1,
             'name' => 'kelas 1',
             'study_time' => 1,
+            'tahun_ajaran' => '2019/2020',
             'created_at' => $mytime,
             'updated_at' => $mytime,
         ]);
@@ -30,6 +31,7 @@ class ClassesSeeder extends Seeder
             'id' => 2,
             'name' => 'kelas 2',
             'study_time' => 2,
+            'tahun_ajaran' => '2019/2020',
             'created_at' => $mytime,
             'updated_at' => $mytime,
         ]);

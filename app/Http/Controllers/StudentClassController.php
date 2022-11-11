@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kelas;
-use App\Models\StudyTime;
+use App\Models\Student;
+use App\Models\StudentClass;
 use Exception;
 use Illuminate\Http\Request;
 
-class ClassController extends Controller
+class StudentClassController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +17,7 @@ class ClassController extends Controller
      */
     public function index()
     {
-        $classes = Kelas::all();
-        $studyTime = StudyTime::all();
-        return view('class.index')->with(compact('classes', 'studyTime'));
+        //
     }
 
     /**
@@ -39,16 +38,18 @@ class ClassController extends Controller
      */
     public function store(Request $request)
     {
-        try {
-            Kelas::create([
-                'name' => $request['name'],
-                'study_time' => $request['study_time'],
-                'tahun_ajaran' => $request['tahun_ajaran'],
-            ]);
+        $cekMuridAda = StudentClass::where('student', $request['student'])
+            ->where('class', $request['class'])
+            ->first();
 
-            return redirect(route('class.index'))->with(['success' => 'Kelas Berhasil Ditambah']);
-        } catch (Exception $e) {
-            return redirect(route('class.index'))->with(['failed' => 'Kelas Gagal Ditambah']);
+        if(isset($cekMuridAda)){ 
+            return redirect('/detail-class/'. $request['class'])->with(['failed' => 'Murid Sudah Terdafatar']);
+        } else{
+            StudentClass::create([
+                'student' => $request['student'],
+                'class' => $request['class']
+            ]);
+            return redirect('/detail-class/'. $request['class'])->with(['success' => 'Murid Berhasil Terdaftar']);
         }
     }
 
@@ -60,12 +61,16 @@ class ClassController extends Controller
      */
     public function show($id)
     {
-        //class
         $class = Kelas::where('id', $id)->first();
 
-        return response()->json([
-            'class' => $class,
-        ]);
+        //cek ada ngggak kelasnya
+        if(isset($class)){
+            $students = Student::all();
+            $studentClassData = StudentClass::where('class', $id)->get();
+            return view('detail_class.index')->with(compact('class', 'studentClassData', 'students'));
+        } else{
+            return redirect(route('class.index'))->with(['failed' => 'Kelas Tidak DiTemukan']);
+        }
     }
 
     /**
@@ -88,18 +93,7 @@ class ClassController extends Controller
      */
     public function update(Request $request, $id)
     {
-        try{
-            Kelas::where('id', $id)->update([
-                'name' => $request['name'],
-                'study_time' => $request['study_time'],
-            ]);
-
-            return redirect(route('class.index'))->with(['success' => 'Kelas Berhasil Diupdate']);
-        }
-
-        catch (Exception $e) {
-            return redirect(route('class.index'))->with(['failed' => 'Kelas Gagal Diupdate']);
-        }
+        //
     }
 
     /**
@@ -110,14 +104,17 @@ class ClassController extends Controller
      */
     public function destroy($id)
     {
+        //update data to delete
+        $class =  StudentClass::where('id', $id)->first();
+
         try {
-            //update data to delete
-            Kelas::where('id', $id)->delete();
+           
+            StudentClass::where('id', $id)->delete();
 
             //redirect to index
-            return redirect(route('class.index'))->with(['success' => 'Berhasil Menghapus Kelas']);
+            return redirect('/detail-class/'. $class->class)->with(['success' => 'Berhasil Menghapus Murid']);
         } catch (Exception $e) {
-            return redirect(route('class.index'))->with(['failed' => 'Gagal Menghapus Kelas']);
+            return redirect('/detail-class/'. $class->class)->with(['failed' => 'Gagal Menghapus Murid']);
         }
     }
 }
