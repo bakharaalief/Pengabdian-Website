@@ -4,6 +4,7 @@ use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\ClassController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NormalController;
+use App\Http\Controllers\StudentClassController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
@@ -34,9 +35,10 @@ Route::resource('/user', UserController::class)->middleware(['isAdmin', 'auth'])
 Route::resource('/student', StudentController::class)->middleware(['isGuru', 'auth']);
 
 //class route
-Route::prefix('/class')->middleware(['isGuru', 'auth'])->group(function () {
-    Route::get('/', [ClassController::class, 'index'])->name('class.index');
-});
+Route::resource('/class', ClassController::class)->middleware(['isGuru', 'auth']);
+
+//class route
+Route::resource('/detail-class', StudentClassController::class)->middleware(['isGuru', 'auth']);
 
 // attendance route
 Route::resource('/attendance', AttendanceController::class)->middleware(['isAdmin', 'auth']);
