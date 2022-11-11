@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\ClassController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NormalController;
@@ -41,6 +42,9 @@ Route::prefix('/student')->middleware(['isGuru', 'auth'])->group(function () {
 Route::prefix('/class')->middleware(['isGuru', 'auth'])->group(function () {
     Route::get('/', [ClassController::class, 'index'])->name('class.index');
 });
+
+// attendance route
+Route::resource('/attendance', AttendanceController::class)->middleware(['isAdmin', 'auth']);
 
 Auth::routes();
 

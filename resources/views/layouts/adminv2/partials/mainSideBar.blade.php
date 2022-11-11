@@ -46,7 +46,7 @@
 
                 <!-- absensi button -->
                 <li class="nav-item">
-                    <a href="{{ route('user.index') }}" class="nav-link">
+                    <a href="{{ route('attendance.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-lg fa-calendar mr-3"></i>
                         <p>Absensi</p>
                     </a>
