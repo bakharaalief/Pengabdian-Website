@@ -29,14 +29,9 @@ Route::prefix('/')->group(function () {
 
 //user route
 Route::resource('/user', UserController::class)->middleware(['isAdmin', 'auth']);
-// Route::prefix('/user')->middleware(['isAdmin', 'auth'])->group(function () {
-//     Route::get('/', [UserController::class, 'index'])->name('user.index');
-// });
 
 //student route
-Route::prefix('/student')->middleware(['isGuru', 'auth'])->group(function () {
-    Route::get('/', [StudentController::class, 'index'])->name('student.index');
-});
+Route::resource('/student', StudentController::class)->middleware(['isGuru', 'auth']);
 
 //class route
 Route::prefix('/class')->middleware(['isGuru', 'auth'])->group(function () {

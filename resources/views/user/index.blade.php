@@ -90,7 +90,8 @@
                         <form method="POST" action="{{ route('user.store') }}" enctype="multipart/form-data">
                         @csrf
                             <div class="modal-body">
-                                {{-- form name --}}
+                                
+                                <!-- form name -->
                                 <div class="form-group">
                                     <label for="name">Nama</label>
                                     <input 
@@ -101,7 +102,7 @@
                                         name="name" required>
                                 </div>
 
-                                {{-- form username --}}
+                                <!-- form username -->
                                 <div class="form-group">
                                     <label for="username">Username</label>
                                     <input 
@@ -112,7 +113,7 @@
                                         name="username" required>
                                 </div>
 
-                                {{-- form password --}}
+                                <!-- form password -->
                                 <div class="form-group">
                                     <label for="password">Password</label>
                                     <input 
@@ -124,9 +125,9 @@
                                         name="password" required>
                                 </div>
 
-                                {{-- form jabatan--}}
+                                <!-- form jabatan -->
                                 <div class="form-group">
-                                    <label for="user_level">Kategori Menu</label>
+                                    <label for="user_level">Jabatan</label>
                                     <select class="form-control" id="user_level" name="user_level">
                                         @foreach ($userLevels as $userLevel)
                                         <option value="{{ $userLevel->id }}">{{ $userLevel->name }}</option>
@@ -162,7 +163,7 @@
 
                         <div class="modal-body">
 
-                            {{-- form name --}}
+                            <!-- form name -->
                             <div class="form-group">
                                 <label for="name_edit">Nama</label>
                                 <input 
@@ -173,7 +174,7 @@
                                     name="name" required>
                             </div>
 
-                            {{-- form password --}}
+                            <!-- form password -->
                             <div class="form-group">
                                 <label for="password_edit">Password</label>
                                 <input 
@@ -185,9 +186,9 @@
                                     name="password">
                             </div>
 
-                            {{-- form jabatan--}}
+                            <!-- form jabatan -->
                             <div class="form-group">
-                                <label for="user_level_edit">Kategori Menu</label>
+                                <label for="user_level_edit">Jabatan</label>
                                 <select class="form-control" id="user_level_edit" name="user_level">
                                     @foreach ($userLevels as $userLevel)
                                     <option value="{{ $userLevel->id }}">{{ $userLevel->name }}</option>
