@@ -20,14 +20,14 @@ class AttendanceSeeder extends Seeder
         $mytime = Carbon::now();
         DB::table('attendance')->insert([
             'id' => 1,
-            'tanggal' => Carbon::parse('2022-11-12'),
+            'tanggal' => Carbon::create('2022', '11', '12'),
             'created_at' => $mytime,
             'updated_at' => $mytime,
         ]);
 
         DB::table('attendance')->insert([
             'id' => 2,
-            'tanggal' => Carbon::parse('2022-11-12'),
+            'tanggal' => Carbon::create('2022', '11', '12'),
             'created_at' => $mytime,
             'updated_at' => $mytime,
         ]);

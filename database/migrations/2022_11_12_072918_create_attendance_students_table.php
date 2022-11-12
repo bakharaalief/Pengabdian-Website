@@ -15,12 +15,12 @@ class CreateAttendanceStudentsTable extends Migration
     {
         Schema::create('attendance_students', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('tanggal')
+            $table->foreignId('attendance_id')
                 ->references('id')
                 ->on('attendance')
                 ->onUpdate('cascade')
                 ->onDelete('restrict');
-            $table->foreignId('student')
+            $table->foreignId('student_id')
                 ->references('id')
                 ->on('students')
                 ->onUpdate('cascade')
