@@ -41,9 +41,9 @@ class AttendanceStudentController extends Controller
      */
     public function store(Request $request)
     {
-        $cekMuridAbsen = AttendanceStudent::where('student_id', $request['student'])
-        ->where('attendance_id', 'attendance')->first();
-                    
+        $cekMuridAbsen = AttendanceStudent::where('attendance_id', 'attendance')
+        ->where('student_id', $request['student']);
+
         if(isset($cekMuridAbsen)){ 
             return redirect('/detail-attendance/'. $request['attendance'])->with(['failed' => 'Murid Sudah Diabsen']);
         } else{
