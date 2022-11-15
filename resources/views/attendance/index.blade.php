@@ -28,40 +28,25 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        <div class="card-header">
-                            <div class="card-tools">
-                                <button class="btn btn-success" data-toggle="modal" data-target="#modal-default">
-                                    <i class="fa fa-plus pr-1" aria-hidden="true"></i>
-                                    Tambah
-                                </button>
-                            </div>
-                        </div>
                         <div class="card-body">
                             <table id="example2" class="table table-bordered table-hover">
                                 <thead>                                    
                                     <tr>
                                         <th>Kelas</th>
+                                        <th>Waktu Belajar</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach ($classes as $class)
                                     <tr>
-                                        <td>Sore</td>
+                                        <td>{{ $class->name }}</td>
+                                        <td>{{ $class->getStudyTime->name }}</td>
                                         <td>
-                                            <button class="btn btn-warning">
-                                                Absen
-                                            </button>
+                                            <a href="/detail-attendance/{{ $class->id }}" class="btn btn-info">Absen</a>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td>Magrib</td>
-                                        <td>
-                                            <button class="btn btn-warning">
-                                                Absen
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    
+                                    @endforeach                                    
                                 </tbody>
                             </table>
                         </div>
@@ -71,5 +56,4 @@
         </div>
     </section>
 </div>
-
 @endsection

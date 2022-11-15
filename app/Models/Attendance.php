@@ -7,10 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Attendance extends Model
 {
-    
+    protected $table = 'attendance';
+
     use HasFactory;
 
     protected $fillable = [
         'tanggal'
     ];
+
+    public function students() 
+    {
+        return $this->belongsToMany(Student::class);
+    }
 }

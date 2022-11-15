@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AttendanceController;
+use App\Http\Controllers\AttendanceStudentController;
 use App\Http\Controllers\ClassController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NormalController;
@@ -42,6 +43,9 @@ Route::resource('/detail-class', StudentClassController::class)->middleware(['is
 
 // attendance route
 Route::resource('/attendance', AttendanceController::class)->middleware(['isAdmin', 'auth']);
+
+// attendance students route
+Route::resource('/detail-attendance', AttendanceStudentController::class)->middleware(['isGuru', 'auth']);
 
 Auth::routes();
 
