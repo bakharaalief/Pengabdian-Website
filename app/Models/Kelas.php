@@ -21,4 +21,9 @@ class Kelas extends Model
     {
         return $this->belongsTo(StudyTime::class, 'study_time', 'id');
     }
+
+    public function attendances()
+    {
+        return $this->hasMany(Attendance::class, 'attendance', 'id');
+    }
 }
