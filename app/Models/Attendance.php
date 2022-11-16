@@ -12,11 +12,17 @@ class Attendance extends Model
     use HasFactory;
 
     protected $fillable = [
-        'tanggal'
+        'tanggal',
+        'class_id'
     ];
 
     public function students() 
     {
         return $this->belongsToMany(Student::class);
+    }
+
+    public function class()
+    {
+        return $this->belongsTo(Kelas::class, 'classes','id');
     }
 }

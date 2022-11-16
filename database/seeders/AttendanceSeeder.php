@@ -36,7 +36,7 @@ class AttendanceSeeder extends Seeder
 
         DB::table('attendance')->insert([
             'id' => 3,
-            'tanggal' => Carbon::create('2022', '11', '12'),
+            'tanggal' => Carbon::create('2022', '11', '13'),
             'class_id' => 2,
             'created_at' => $mytime,
             'updated_at' => $mytime,
@@ -44,7 +44,7 @@ class AttendanceSeeder extends Seeder
 
         DB::table('attendance')->insert([
             'id' => 4,
-            'tanggal' => Carbon::create('2022', '11', '13'),
+            'tanggal' => Carbon::create('2022', '11', '14'),
             'class_id' => 2,
             'created_at' => $mytime,
             'updated_at' => $mytime,
