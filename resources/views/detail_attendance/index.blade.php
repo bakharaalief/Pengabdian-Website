@@ -10,12 +10,12 @@
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-         <!-- Content Header (Page header) -->
-         <div class="content-header">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        {{-- <h1 class="m-0">Kelas {{ $class->name }} ({{ $class->tahun_ajaran }})</h1> --}}
+                        {{-- <h1 class="m-0">Tanggal {{ $attendance->getAttendances->tanggal }}</h1> --}}
                     </div>
                 </div>
             </div><!-- /.container-fluid -->
@@ -87,12 +87,12 @@
                         @csrf
                             <div class="modal-body">
 
-                                <!-- form jabatan -->
+                                <!-- form get student sesuai dengan class-nya saja -->
                                 <div class="form-group">
                                     <label for="student">Nama Siswa</label>
                                     <select class="form-control" id="student" name="student">
                                         @foreach ($students as $student)
-                                        <option value="{{ $student->id }}">{{ $student->name }} (Semester {{ $student->semester }})</option>
+                                        <option value="{{ $student->getStudent->id }}">{{ $student->getStudent->name }} (Semester {{ $student->getStudent->semester }})</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -118,7 +118,6 @@
             <div class="modal fade" id="modal-default-3">
                 <div class="modal-dialog">
                     <div class="modal-content">
-
                         <div class="modal-header">
                             <h4 class="modal-title">Delete Murid</h4>
                             <button menu="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -131,7 +130,7 @@
                         @method('Delete')
 
                         <div class="modal-body">
-                            <p>Anda Yakin Ingin Menghapus Murid Ini Dari Kelas ? </p>
+                            <p>Anda Yakin Ingin Menghapus Murid Ini Dari Absen Hari ini?</p>
                         </div>
                         <div class="modal-footer justify-content-between">
                             <button menu="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -156,7 +155,7 @@
 
         var id = $(this).data('id');
 
-        $("#form-delete").attr('action', '/detail-class/' + id);
+        $("#form-delete").attr('action', '/detail-attendance/' + id);
         $("#modal-default-3").modal('show');
       });
     })

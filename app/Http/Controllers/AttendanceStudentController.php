@@ -64,16 +64,11 @@ class AttendanceStudentController extends Controller
     public function show($id)
     {
         $class = Kelas::where('id', $id)->first();
-        
-        // cek kelas ada apa kagak
-        if(isset($class)){
-            $students = Student::all();
-            $attendanceStudentData = AttendanceStudent::where('attendance_id', $id)->get();
-            return view('detail_attendance.index')->with(compact('class', 'attendanceStudentData', 'students'));
-        } else{
-        
-            return redirect(route('attendance.index'))->with(['failed' => 'Kelas Tidak DiTemukan']);
-        }
+        $attendance = Attendance::where('id', $id)->first();
+
+        $students = StudentClass::where('class', $id)->get();
+        $attendanceStudentData = AttendanceStudent::where('attendance_id', $id)->get();
+        return view('detail_attendance.index')->with(compact('class', 'attendanceStudentData', 'students'));
     }
 
     /**
