@@ -16,6 +16,11 @@ class CreateAttendanceTable extends Migration
         Schema::create('attendance', function (Blueprint $table) {
             $table->id();
             $table->date('tanggal');
+            $table->foreignId('class_id')
+            ->references('id')
+            ->on('classes')
+            ->onUpdate('cascade')
+            ->onDelete('cascade');
             $table->timestamps();
         });
     }
