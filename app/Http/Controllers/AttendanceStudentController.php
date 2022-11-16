@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Http\Requests\UpdateAttendanceStudentRequest;
 use App\Models\Attendance;
 use App\Models\AttendanceStudent;
-use App\Models\Student;
 use App\Models\StudentClass;
 use App\Models\Kelas;
 
@@ -61,12 +60,14 @@ class AttendanceStudentController extends Controller
      * @param  \App\Models\AttendanceStudent  $attendanceStudent
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, Request $request)
     {
-        $class = Kelas::where('id', $id)->first();
-        $attendance = Attendance::where('id', $id)->first();
-
-        $students = StudentClass::where('class', $id)->get();
+        $class = Kelas::where('id', $id)->first(); 
+        $attendance = Attendance::where('id', $id)->get();
+        $class_id = Attendance::where('id', $id)->first();
+        
+        $students = StudentClass::where('class', $class_id->class_id)->get();
+        
         $attendanceStudentData = AttendanceStudent::where('attendance_id', $id)->get();
         return view('detail_attendance.index')->with(compact('class', 'attendanceStudentData', 'students'));
     }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Attendance;
+use App\Models\Kelas;
 
 class AttendanceController extends Controller
 {
@@ -33,7 +34,6 @@ class AttendanceController extends Controller
     public function show($id)
     {
         $attendances = Attendance::where('class_id', $id)->get(); 
-        
         return view('attendance.index')->with(compact('attendances'));
     }
 }
