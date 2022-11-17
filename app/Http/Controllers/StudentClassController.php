@@ -108,7 +108,6 @@ class StudentClassController extends Controller
         $class =  StudentClass::where('id', $id)->first();
 
         try {
-           
             StudentClass::where('id', $id)->delete();
 
             //redirect to index

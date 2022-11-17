@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Attendance;
 use App\Models\Kelas;
+use Exception;
 
 class AttendanceController extends Controller
 {
@@ -41,6 +42,21 @@ class AttendanceController extends Controller
             return view('attendance.index')->with(compact('attendances'));
         } else {
             return redirect(route('class.index'))->with(['failed' => 'Kelas Tidak DiTemukan']);
+        }
+    }
+    
+    public function destroy($id) 
+    {
+        //update data to delete
+        $attendances =  Attendance::where('id', $id)->first();
+        
+        try {
+            Attendance::where('id', $id)->delete();
+
+            //redirect to index
+            return redirect('/attendance/'. $attendances->class_id)->with(['success' => 'Berhasil Menghapus Tanggal']);
+        } catch (Exception $e) {
+            return redirect('/attendance/'. $attendances->class_id)->with(['failed' => 'Gagal Menghapus Tanggal']);
         }
     }
 }

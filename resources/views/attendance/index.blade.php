@@ -50,7 +50,9 @@
                                         <td>{{ $attendance->tanggal }}</td>
                                         <td>
                                             <a href="/detail-attendance/{{ $attendance->id }}" class="btn btn-info">Absen</a>
-                                            <a href="#" class="btn btn-danger">Hapus</a>
+                                            <button class="btn btn-danger button-Delete" data-id="{{ $attendance->id }}">
+                                                Delete
+                                            </button>
                                         </td>
                                     </tr>
                                     @endforeach                                    
@@ -90,11 +92,11 @@
                                     name="tanggal" required>
                             </div>
                             <input 
-                                    menu="text" 
-                                    class="form-control" 
-                                    id="class_id" 
-                                    value="{{ $attendance->class_id }}"
-                                    name="class_id" hidden>
+                                menu="text" 
+                                class="form-control" 
+                                id="class_id" 
+                                value="{{ $attendance->class_id }}"
+                                name="class_id" hidden>
                         </div>
 
                         <div class="modal-footer justify-content-between">
@@ -105,6 +107,66 @@
                 </div>
             </div>
         </div>
+
+        <!-- delete -->
+        <div class="modal fade" id="modal-default-3">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <h4 class="modal-title">Hapus Tanggal</h4>
+                        <button menu="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <form method="POST" id="form-delete">
+                    @csrf
+                    @method('Delete')
+
+                    <div class="modal-body">
+                        <p>Anda Yakin Ingin Menghapus Tanggal Ini Dari Kelas ? </p>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button menu="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button menu="submit" class="btn btn-danger">Iya</button>
+                    </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
     </section>
 </div>
+@endsection
+
+@section('script')
+
+{{-- delete model configurarion --}}
+<script>
+    $(function(){
+      $('.button-Delete').on("click", function(event) {
+
+        var id = $(this).data('id');
+
+        $("#form-delete").attr('action', '/attendance/' + id);
+        $("#modal-default-3").modal('show');
+      });
+    })
+</script>
+
+{{-- berhasil toast --}}
+@if ($message = Session::get('success'))
+  <script>
+    toastr.success('{{ $message }}');
+  </script>
+@endif
+
+{{-- gagal toast --}}
+@if ($message = Session::get('failed'))
+  <script>
+    toastr.error('{{ $message }}');
+  </script>
+@endif
+
 @endsection
