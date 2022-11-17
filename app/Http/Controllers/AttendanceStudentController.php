@@ -8,6 +8,7 @@ use App\Models\Attendance;
 use App\Models\AttendanceStudent;
 use App\Models\StudentClass;
 use App\Models\Kelas;
+use Exception;
 
 
 class AttendanceStudentController extends Controller
@@ -107,8 +108,18 @@ class AttendanceStudentController extends Controller
      * @param  \App\Models\AttendanceStudent  $attendanceStudent
      * @return \Illuminate\Http\Response
      */
-    public function destroy(AttendanceStudent $attendanceStudent)
+    public function destroy($id)
     {
-        //
+        //update data to delete
+        $attendanceStudent =  AttendanceStudent::where('id', $id)->first();
+        
+        try {
+            AttendanceStudent::where('id', $id)->delete();
+
+            //redirect to index
+            return redirect('/detail-attendance/'. $attendanceStudent->attendance_id)->with(['success' => 'Berhasil Menghapus Tanggal']);
+        } catch (Exception $e) {
+            return redirect('/detail-attendance/'. $attendanceStudent->attendance_id)->with(['failed' => 'Gagal Menghapus Tanggal']);
+        }
     }
 }
