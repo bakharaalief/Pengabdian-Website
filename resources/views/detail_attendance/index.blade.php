@@ -101,7 +101,7 @@
                                     menu="text" 
                                     class="form-control" 
                                     id="attendance" 
-                                    value="{{ $class->id }}"
+                                    value="{{ $attendance->first()->id }}"
                                     name="attendance" hidden>
                             </div>
 
@@ -151,28 +151,28 @@
 {{-- delete model configurarion --}}
 <script>
     $(function(){
-      $('.button-Delete').on("click", function(event) {
+        $('.button-Delete').on("click", function(event) {
 
-        var id = $(this).data('id');
+            var id = $(this).data('id');
 
-        $("#form-delete").attr('action', '/detail-attendance/' + id);
-        $("#modal-default-3").modal('show');
-      });
+            $("#form-delete").attr('action', '/detail-attendance/' + id);
+            $("#modal-default-3").modal('show');
+        });
     })
 </script>
 
 {{-- berhasil toast --}}
 @if ($message = Session::get('success'))
-  <script>
+<script>
     toastr.success('{{ $message }}');
-  </script>
+</script>
 @endif
 
 {{-- gagal toast --}}
 @if ($message = Session::get('failed'))
-  <script>
+<script>
     toastr.error('{{ $message }}');
-  </script>
+</script>
 @endif
 
 @endsection

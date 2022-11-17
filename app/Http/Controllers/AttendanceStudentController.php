@@ -63,7 +63,6 @@ class AttendanceStudentController extends Controller
      */
     public function show($id)
     {
-        $class = Kelas::where('id', $id)->first(); 
         $attendance = Attendance::where('id', $id)->get();
         $class_id = Attendance::where('id', $id)->first();
 
@@ -72,7 +71,7 @@ class AttendanceStudentController extends Controller
             $students = StudentClass::where('class', $class_id->class_id)->get();
             $attendanceStudentData = AttendanceStudent::where('attendance_id', $id)->get();
 
-            return view('detail_attendance.index')->with(compact('class', 'attendanceStudentData', 'students'));
+            return view('detail_attendance.index')->with(compact('attendance', 'attendanceStudentData', 'students'));
         } else {
             return redirect(route('class.index'))->with(['failed' => 'Tanggal Tidak Ditemukan']);
         }
