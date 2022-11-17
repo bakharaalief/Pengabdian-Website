@@ -116,9 +116,9 @@ class AttendanceStudentController extends Controller
             AttendanceStudent::where('id', $id)->delete();
 
             //redirect to index
-            return redirect('/detail-attendance/'. $attendanceStudent->attendance_id)->with(['success' => 'Berhasil Menghapus Tanggal']);
+            return redirect('/detail-attendance/'. $attendanceStudent->attendance_id)->with(['success' => 'Berhasil Menghapus Murid']);
         } catch (Exception $e) {
-            return redirect('/detail-attendance/'. $attendanceStudent->attendance_id)->with(['failed' => 'Gagal Menghapus Tanggal']);
+            return redirect('/detail-attendance/'. $attendanceStudent->attendance_id)->with(['failed' => 'Gagal Menghapus Murid']);
         }
     }
 }
