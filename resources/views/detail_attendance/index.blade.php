@@ -97,12 +97,12 @@
                                     </select>
                                 </div>
 
-                                <input 
+                                {{-- <input 
                                     menu="text" 
                                     class="form-control" 
                                     id="attendance" 
                                     value="{{ $class->id }}"
-                                    name="attendance" hidden>
+                                    name="attendance" hidden> --}}
                             </div>
 
                             <div class="modal-footer justify-content-between">

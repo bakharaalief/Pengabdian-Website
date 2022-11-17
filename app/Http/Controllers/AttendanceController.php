@@ -33,7 +33,14 @@ class AttendanceController extends Controller
 
     public function show($id)
     {
-        $attendances = Attendance::where('class_id', $id)->get(); 
-        return view('attendance.index')->with(compact('attendances'));
+        $class = Kelas::where('id', $id)->first();
+
+        // cek class-nya ada ga
+        if (isset($class)) {
+            $attendances = Attendance::where('class_id', $id)->get();     
+            return view('attendance.index')->with(compact('attendances'));
+        } else {
+            return redirect(route('class.index'))->with(['failed' => 'Kelas Tidak DiTemukan']);
+        }
     }
 }

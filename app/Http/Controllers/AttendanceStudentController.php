@@ -60,16 +60,22 @@ class AttendanceStudentController extends Controller
      * @param  \App\Models\AttendanceStudent  $attendanceStudent
      * @return \Illuminate\Http\Response
      */
-    public function show($id, Request $request)
+    public function show($id)
     {
         $class = Kelas::where('id', $id)->first(); 
         $attendance = Attendance::where('id', $id)->get();
         $class_id = Attendance::where('id', $id)->first();
-        
-        $students = StudentClass::where('class', $class_id->class_id)->get();
-        
-        $attendanceStudentData = AttendanceStudent::where('attendance_id', $id)->get();
-        return view('detail_attendance.index')->with(compact('class', 'attendanceStudentData', 'students'));
+
+        // Cek class_id  ada apa kagak
+        if (isset($class_id)) {
+            $students = StudentClass::where('class', $class_id->class_id)->get();
+            $attendanceStudentData = AttendanceStudent::where('attendance_id', $id)->get();
+
+            return view('detail_attendance.index')->with(compact('class', 'attendanceStudentData', 'students'));
+        } else {
+            return redirect(route('class.index'))->with(['failed' => 'Tanggal Tidak Ditemukan']);
+        }
+
     }
 
     /**

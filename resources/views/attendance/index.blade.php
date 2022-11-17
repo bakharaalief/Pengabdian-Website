@@ -89,13 +89,6 @@
                                     type="date" 
                                     name="tanggal" required>
                             </div>
-
-                            <input 
-                                    menu="text" 
-                                    class="form-control" 
-                                    id="class_id" 
-                                    value="{{ $attendance->class_id }}"
-                                    name="class_id" hidden>
                         </div>
 
                         <div class="modal-footer justify-content-between">
