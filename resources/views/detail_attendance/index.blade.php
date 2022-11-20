@@ -15,7 +15,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Tanggal</h1>
+                        <h1 class="m-0">Tanggal {{ $attendance->tanggal->format('d/m/Y') }}</h1>
                     </div>
                 </div>
             </div><!-- /.container-fluid -->
@@ -30,35 +30,33 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
-                            <div class="card-header">
-                                <div class="card-tools">
-                                    <button class="btn btn-success" data-toggle="modal" data-target="#modal-default">
-                                        <i class="fa fa-plus pr-1" aria-hidden="true"></i>
-                                        Tambah
-                                    </button>
-                                </div>
-                            </div>
                             <div class="card-body">
                                 <table id="example2" class="table table-bordered table-hover">
                                     <thead>
                                         <tr>
                                             <th>Name</th>
-                                            <th>Gender</th>
-                                            <th>Semester</th>
-                                            <th>Sekolah</th>
-                                            <th>Delete</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($attendanceStudentData as $attendanceStudent)
+                                        @foreach ($attendanceStudentData as $attendance)
                                         <tr>
-                                            <td>{{ $attendanceStudent->getStudent->name }}</td>
-                                            <td>{{ $attendanceStudent->getStudent->gender }}</td>
-                                            <td>{{ $attendanceStudent->getStudent->semester }}</td>
-                                            <td>{{ $attendanceStudent->getStudent->school }}</td>
+                                            <td>{{ $attendance->getStudent->name }}</td>
+
+                                            @if($attendance->status == 0)
+                                            <td>Belum di Absen</td>
+                                            @elseif($attendance->status == 1)
+                                            <td>Hadir</td>
+                                            @elseif($attendance->status == 2)
+                                            <td>Izin</td>
+                                            @else 
+                                            <td>Sakit</td>
+                                            @endif
+
                                             <td>
-                                                <button class="btn btn-danger button-Delete" data-id="{{ $attendanceStudent->id }}">
-                                                    Delete
+                                                <button class="btn btn-warning button-Edit" data-id="{{ $attendance->id }}">
+                                                    Edit
                                                 </button>
                                             </td>
                                         </tr>
@@ -71,71 +69,48 @@
                 </div>
             </div>
 
-            <!-- add -->
-            <div class="modal fade" id="modal-default">
+            <!-- edit -->
+            <div class="modal fade" id="modal-default-2">
                 <div class="modal-dialog">
                     <div class="modal-content">
 
                         <div class="modal-header">
-                            <h4 class="modal-title">Tambah Absen</h4>
+                            <h4 class="modal-title">Edit Absen</h4>
                             <button menu="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
 
-                        <form method="POST" action="/detail-attendance/" enctype="multipart/form-data">
+                        <form method="POST" id="form-edit" enctype="multipart/form-data">
                         @csrf
-                            <div class="modal-body">
-
-                                <!-- form get student sesuai dengan class-nya saja -->
-                                <div class="form-group">
-                                    <label for="student">Nama Siswa</label>
-                                    <select class="form-control" id="student" name="student">
-                                        @foreach ($students as $student)
-                                        <option value="{{ $student->getStudent->id }}">{{ $student->getStudent->name }} (Semester {{ $student->getStudent->semester }})</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-
-                                <input 
-                                    menu="text" 
-                                    class="form-control" 
-                                    id="attendance" 
-                                    value="{{ $attendance->first()->id }}"
-                                    name="attendance" hidden>
-                            </div>
-
-                            <div class="modal-footer justify-content-between">
-                                <button menu="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                <button menu="submit" class="btn btn-success">Tambah</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
-            <!-- delete -->
-            <div class="modal fade" id="modal-default-3">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title">Delete Murid</h4>
-                            <button menu="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-
-                        <form method="POST" id="form-delete">
-                        @csrf
-                        @method('Delete')
+                        @method('PUT')
 
                         <div class="modal-body">
-                            <p>Anda Yakin Ingin Menghapus Murid Ini Dari Absen Hari ini?</p>
+
+                           <!-- form absen -->
+                           <div class="form-group">
+                                <label for="attendance_edit">Jabatan</label>
+                                <select class="form-control" id="attendance_edit" name="attendance">
+                                    <option value="0">Belum Absen</option>
+                                    <option value="1">Hadir</option>
+                                    <option value="2">Izin</option>
+                                    <option value="3">Sakit</option>
+                                </select>
+                            </div>
+
+                            <!-- form id absen -->
+                            <input 
+                                menu="text" 
+                                class="form-control" 
+                                id="attendance_id_edit" 
+                                name="attendance_id" hidden>
                         </div>
+
                         <div class="modal-footer justify-content-between">
                             <button menu="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button menu="submit" class="btn btn-danger">Iya</button>
+                            <button menu="submit" class="btn btn-primary">Update</button>
                         </div>
+
                         </form>
                     </div>
                 </div>
@@ -148,18 +123,29 @@
 
 @section('script')
 
-{{-- delete model configurarion --}}
+{{-- edit modal configuration --}}
 <script>
     $(function(){
-        $('.button-Delete').on("click", function(event) {
+      $('.button-Edit').on("click", function(event) {
+        
+        var id = $(this).data('id');
 
-            var id = $(this).data('id');
-
-            $("#form-delete").attr('action', '/detail-attendance/' + id);
-            $("#modal-default-3").modal('show');
+        $.ajax({
+            url: '/detail-attendance-form/' + id,
+            menu: 'GET',
+            datamenu: 'json',
+            error: function(req, err){ console.log('error : ' + err) }
+        })
+        .done(function(response) {
+            $("#form-edit").attr('action', '/detail-attendance/' + id);
+            $("#attendance_edit").val(response['attendance']['status']);
+            $("#attendance_id_edit").val(response['attendance']['id']);
+            $("#modal-default-2").modal('show');
         });
+      });
     })
 </script>
+
 
 {{-- berhasil toast --}}
 @if ($message = Session::get('success'))

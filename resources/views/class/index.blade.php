@@ -45,7 +45,8 @@
                                             <th>Kelas</th>
                                             <th>Waktu Belajar</th>
                                             <th>Tahun Ajaran</th>
-                                            <th>Action</th>
+                                            <th>Murid</th>
+                                            <th>Absen</th>
                                             <th>Edit</th>
                                             <th>Delete</th>
                                         </tr>
@@ -58,6 +59,8 @@
                                             <td>{{ $class->tahun_ajaran }}</td>
                                             <td>
                                                 <a href="/detail-class/{{ $class->id }}" class="btn btn-success">Murid</a>
+                                            </td>
+                                            <td>
                                                 <a href="/attendance/{{ $class->id }}" class="btn btn-info">Absen</a>
                                             </td>
                                             <td>

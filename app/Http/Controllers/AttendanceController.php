@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Attendance;
+use App\Models\AttendanceStudent;
 use App\Models\Kelas;
+use App\Models\StudentClass;
+use Carbon\Carbon;
 use Exception;
 
 class AttendanceController extends Controller
@@ -24,10 +27,32 @@ class AttendanceController extends Controller
         if (isset($cekTanggal)) {
             return redirect('/attendance/'. $request['class_id'])->with(['failed' => 'Tanggal Sudah Ada']);
         } else {
-            Attendance::create([
+            //get student data
+            $students = StudentClass::where('class', $request['class_id'])->get();
+
+            //create attendance
+            $mytime = Carbon::now();
+            $attendanceId = Attendance::insertGetId([
                 'tanggal' => date("y-m-d", strtotime($request['tanggal'])),
-                'class_id' => $request['class_id']
+                'class_id' => $request['class_id'],
+                'created_at' => $mytime,
+                'updated_at' =>$mytime
             ]);
+
+            //create attendance student
+            $attendanceData = array();
+            foreach($students as $student){
+                $attendanceData[] = [
+                    'attendance_id' => $attendanceId,
+                    'student_id' => $student->id,
+                    'status' => 0,
+                    'created_at' => $mytime,
+                    'updated_at' =>$mytime
+                ];
+            }
+
+            AttendanceStudent::Insert($attendanceData);
+
             return redirect('/attendance/'. $request['class_id'])->with(['success' => 'Tanggal Berhasil Ditambah']);
         }
     }
@@ -38,8 +63,8 @@ class AttendanceController extends Controller
 
         // cek class-nya ada ga
         if (isset($class)) {
-            $attendances = Attendance::where('class_id', $id)->get();     
-            return view('attendance.index')->with(compact('attendances'));
+            $attendances = Attendance::where('class_id', $id)->get();
+            return view('attendance.index')->with(compact('attendances', 'class'));
         } else {
             return redirect(route('class.index'))->with(['failed' => 'Kelas Tidak DiTemukan']);
         }

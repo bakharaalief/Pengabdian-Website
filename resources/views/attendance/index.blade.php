@@ -15,7 +15,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Attendance</h1>
+                    <h1 class="m-0">Absen {{$class->name}}</h1>
                 </div>
             </div>
         </div><!-- /.container-fluid -->
@@ -41,15 +41,16 @@
                                 <thead>                                    
                                     <tr>
                                         <th>Tanggal</th>
-                                        <th>Action</th>
+                                        <th>Detail</th>
+                                        <th>Delete</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($attendances as $attendance)
                                     <tr>
-                                        <td>{{ $attendance->tanggal }}</td>
+                                        <td>{{ $attendance->tanggal->format('d/m/Y') }}</td>
+                                        <td><a href="/detail-attendance/{{ $attendance->id }}" class="btn btn-info">Detail</a></td>
                                         <td>
-                                            <a href="/detail-attendance/{{ $attendance->id }}" class="btn btn-info">Absen</a>
                                             <button class="btn btn-danger button-Delete" data-id="{{ $attendance->id }}">
                                                 Delete
                                             </button>
@@ -95,7 +96,7 @@
                                 menu="text" 
                                 class="form-control" 
                                 id="class_id" 
-                                value="{{ $attendance->class_id }}"
+                                value="{{ $class->id }}"
                                 name="class_id" hidden>
                         </div>
 

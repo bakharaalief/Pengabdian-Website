@@ -14,6 +14,7 @@ class AttendanceStudent extends Model
     protected $fillable = [
         'attendance_id',
         'student_id',
+        'status'
     ];
 
     public function getStudent()

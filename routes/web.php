@@ -46,6 +46,7 @@ Route::resource('/attendance', AttendanceController::class)->middleware(['isAdmi
 
 // attendance students route
 Route::resource('/detail-attendance', AttendanceStudentController::class)->middleware(['isGuru', 'auth']);
+Route::get('/detail-attendance-form/{id}', [AttendanceStudentController::class, 'showForm'])->middleware(['isGuru', 'auth']);
 
 Auth::routes();
 

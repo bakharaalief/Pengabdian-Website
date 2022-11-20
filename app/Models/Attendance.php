@@ -16,13 +16,5 @@ class Attendance extends Model
         'class_id'
     ];
 
-    public function students() 
-    {
-        return $this->belongsToMany(Student::class);
-    }
-
-    public function class()
-    {
-        return $this->belongsTo(Kelas::class, 'classes','id');
-    }
+    protected $dates = ['tanggal'];
 }

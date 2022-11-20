@@ -21,6 +21,7 @@ class AttendanceStudentSeeder extends Seeder
         DB::table('attendance_students')->insert([
             'attendance_id' => 1,
             'student_id' => 1,
+            'status' => 1,
             'created_at' => $mytime,
             'updated_at' =>$mytime
         ]);
@@ -28,6 +29,7 @@ class AttendanceStudentSeeder extends Seeder
         DB::table('attendance_students')->insert([
             'attendance_id' => 1,
             'student_id' => 2,
+            'status' => 1,
             'created_at' => $mytime,
             'updated_at' =>$mytime
         ]);
@@ -35,6 +37,7 @@ class AttendanceStudentSeeder extends Seeder
         DB::table('attendance_students')->insert([
             'attendance_id' => 2,
             'student_id' => 1,
+            'status' => 1,
             'created_at' => $mytime,
             'updated_at' =>$mytime
         ]);
@@ -42,6 +45,7 @@ class AttendanceStudentSeeder extends Seeder
         DB::table('attendance_students')->insert([
             'attendance_id' => 2,
             'student_id' => 2,
+            'status' => 1,
             'created_at' => $mytime,
             'updated_at' =>$mytime
         ]);

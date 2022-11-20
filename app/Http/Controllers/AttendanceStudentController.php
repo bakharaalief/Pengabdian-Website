@@ -41,18 +41,7 @@ class AttendanceStudentController extends Controller
      */
     public function store(Request $request)
     {
-        $cekMuridAbsen = AttendanceStudent::where('student_id', $request['student'])
-        ->where('attendance_id', $request['attendance'])->first();
-
-        if(isset($cekMuridAbsen)){ 
-            return redirect('/detail-attendance/'. $request['attendance'])->with(['failed' => 'Murid Sudah Diabsen']);
-        } else{
-            AttendanceStudent::create([
-                'attendance_id' => $request['attendance'],
-                'student_id' => $request['student']
-            ]);
-            return redirect('/detail-attendance/'. $request['attendance'])->with(['success' => 'Murid Berhasil Diabsen']);
-        }
+        //
     }
 
     /**
@@ -63,19 +52,17 @@ class AttendanceStudentController extends Controller
      */
     public function show($id)
     {
-        $attendance = Attendance::where('id', $id)->get();
-        $class_id = Attendance::where('id', $id)->first();
+        $attendance = Attendance::where('id', $id)->first();
+        $class = Attendance::where('id', $id)->first();
 
         // Cek class_id  ada apa kagak
-        if (isset($class_id)) {
-            $students = StudentClass::where('class', $class_id->class_id)->get();
+        if (isset($class) && isset($attendance)) {
             $attendanceStudentData = AttendanceStudent::where('attendance_id', $id)->get();
 
-            return view('detail_attendance.index')->with(compact('attendance', 'attendanceStudentData', 'students'));
+            return view('detail_attendance.index')->with(compact('attendance', 'attendanceStudentData'));
         } else {
             return redirect(route('class.index'))->with(['failed' => 'Tanggal Tidak Ditemukan']);
         }
-
     }
 
     /**
@@ -92,13 +79,23 @@ class AttendanceStudentController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateAttendanceStudentRequest  $request
-     * @param  \App\Models\AttendanceStudent  $attendanceStudent
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateAttendanceStudentRequest $request, AttendanceStudent $attendanceStudent)
+    public function update(Request $request, $id)
     {
-        //
+        try{
+            AttendanceStudent::where('id', $id)->update([
+                'status' => $request['attendance'],
+            ]);
+
+            return redirect('/detail-attendance/'.$request['attendance_id'])->with(['success' => 'Murid Berhasil Diupdate']);
+        }
+
+        catch (Exception $e) {
+            return redirect('/detail-attendance/'.$request['attendance_id'])->with(['failed' => 'Murid Gagal Diupdate']);
+        }
     }
 
     /**
@@ -109,16 +106,16 @@ class AttendanceStudentController extends Controller
      */
     public function destroy($id)
     {
-        //update data to delete
-        $attendanceStudent =  AttendanceStudent::where('id', $id)->first();
-        
-        try {
-            AttendanceStudent::where('id', $id)->delete();
+        //
+    }
 
-            //redirect to index
-            return redirect('/detail-attendance/'. $attendanceStudent->attendance_id)->with(['success' => 'Berhasil Menghapus Murid']);
-        } catch (Exception $e) {
-            return redirect('/detail-attendance/'. $attendanceStudent->attendance_id)->with(['failed' => 'Gagal Menghapus Murid']);
-        }
+    public function showForm($id)
+    {
+         //student
+         $attendance = AttendanceStudent::where('id', $id)->first();
+
+         return response()->json([
+             'attendance' => $attendance,
+         ]);
     }
 }

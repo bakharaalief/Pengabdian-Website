@@ -25,6 +25,7 @@ class CreateAttendanceStudentsTable extends Migration
                 ->on('students')
                 ->onUpdate('cascade')
                 ->onDelete('restrict');
+            $table->integer('status');
             $table->timestamps();
         });
     }

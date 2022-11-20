@@ -18,9 +18,4 @@ class Student extends Model
     ];
 
     protected $dates = ['birth_date'];
-
-    public function attendances() 
-    {
-        return $this->belongsToMany(Attendance::class);
-    }
 }
