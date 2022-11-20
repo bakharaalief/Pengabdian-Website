@@ -43,14 +43,6 @@
                         <p>Kelas</p>
                     </a>
                 </li>
-
-                <!-- absensi button -->
-                <li class="nav-item">
-                    <a href="{{ route('attendance.index') }}" class="nav-link">
-                        <i class="nav-icon fas fa-lg fa-calendar mr-3"></i>
-                        <p>Absensi</p>
-                    </a>
-                </li>
             </nav>
         </ul>
     </div>
