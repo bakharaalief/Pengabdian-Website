@@ -41,9 +41,9 @@ class StudentClassController extends Controller
         $cekMuridAda = StudentClass::where('student', $request['student'])
             ->where('class', $request['class'])
             ->first();
-
+            
         if(isset($cekMuridAda)){ 
-            return redirect('/detail-class/'. $request['class'])->with(['failed' => 'Murid Sudah Terdafatar']);
+            return redirect('/detail-class/'. $request['class'])->with(['failed' => 'Murid Sudah Terdaftar']);
         } else{
             StudentClass::create([
                 'student' => $request['student'],
@@ -108,7 +108,6 @@ class StudentClassController extends Controller
         $class =  StudentClass::where('id', $id)->first();
 
         try {
-           
             StudentClass::where('id', $id)->delete();
 
             //redirect to index
