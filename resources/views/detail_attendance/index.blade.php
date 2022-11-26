@@ -139,7 +139,7 @@
         .done(function(response) {
             $("#form-edit").attr('action', '/detail-attendance/' + id);
             $("#attendance_edit").val(response['attendance']['status']);
-            $("#attendance_id_edit").val(response['attendance']['id']);
+            $("#attendance_id_edit").val(response['attendance']['attendance_id']);
             $("#modal-default-2").modal('show');
         });
       });
