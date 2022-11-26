@@ -1,6 +1,6 @@
 <header id="header" class="fixed-top ">
     <div class="container d-flex align-items-center justify-content-between">
-        <h1 class="logo"><a href="index.html">Sistem Absensi</a></h1>
+        <h1 class="logo"><a href="index.html">TPA Al-Manshurin</a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
@@ -8,7 +8,7 @@
             <ul>
                 <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
                 <li><a class="nav-link scrollto" href="#about">About</a></li>
-                <li><a class="nav-link scrollto " href="#portfolio">Portfolio</a></li>
+                <li><a class="nav-link scrollto" href="#features">Features</a></li>
 
                 @if (Route::has('login'))
                 <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
