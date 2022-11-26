@@ -33,7 +33,7 @@
                         <!-- small box -->
                         <div class="small-box bg-success">
                             <div class="inner">
-                                <h3>53</h3>
+                                <h3>{{ $students_amount }}</h3>
                                 <p>Murid</p>
                             </div>
                             <div class="icon">
@@ -48,7 +48,7 @@
                         <!-- small box -->
                         <div class="small-box bg-info">
                             <div class="inner">
-                                <h3>12</h3>
+                                <h3>{{ $teachers_amount }}</h3>
                                 <p>Guru</p>
                             </div>
                             <div class="icon">
@@ -63,7 +63,7 @@
                         <!-- small box -->
                         <div class="small-box bg-danger">
                             <div class="inner">
-                                <h3>65</h3>
+                                <h3>{{ $sukarelawan_amount }}</h3>
                                 <p>Sukarelawan</p>
                             </div>
                             <div class="icon">
@@ -78,7 +78,7 @@
                         <!-- small box -->
                         <div class="small-box bg-warning">
                             <div class="inner">
-                                <h3>44</h3>
+                                <h3>{{ $class_amount }}</h3>
                                 <p>Kelas</p>
                             </div>
                             <div class="icon">
