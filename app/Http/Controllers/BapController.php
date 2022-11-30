@@ -52,14 +52,15 @@ class BapController extends Controller
 
     public function destroy($id)
     {
+        $bap = Bap::where('id', $id)->first();
         try {
             //update data to delete
             Bap::where('id', $id)->delete();
 
             //redirect to index
-            return redirect('/bap/' . 1)->with(['success' => 'Berhasil Menghapus BAP']);
+            return redirect('/bap/' . $bap->class_id)->with(['success' => 'Berhasil Menghapus BAP']);
         } catch (Exception $e) {
-            return redirect('/bap/' . 1)->with(['failed' => 'Gagal Menghapus BAP']);
+            return redirect('/bap/' . $bap->class_id)->with(['failed' => 'Gagal Menghapus BAP']);
         }
     }
 }
