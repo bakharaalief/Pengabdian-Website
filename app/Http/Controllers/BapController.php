@@ -14,7 +14,7 @@ class BapController extends Controller
     public function show($id)
     {
         $class = Kelas::where('id', $id)->first();
-        $guru = User::where('id', 2)->first();
+        $guru = Bap::where('class_id', $id)->first();
         
         // cek class-nya ada ga
         if (isset($class)) {
@@ -38,13 +38,28 @@ class BapController extends Controller
                 'materi' => $request['materi'],
                 'keterangan' => $request['keterangan'],
                 'tanggal' => date("y-m-d", strtotime($request['tanggal'])),
-                'guru' => 2,
+                'guru' => $request['guru_id'],
                 'class_id' => $request['class_id']
             ]);
+
+            
 
             return redirect('/bap/' . $request['class_id'])->with(['success' => 'Bap Berhasil Ditambah']);
         } catch (Exception $e) {
             return redirect('/bap/' . $request['class_id'])->with(['failed' => 'Bap Gagal Ditambah']);
+        }
+    }
+
+    public function destroy($id)
+    {
+        try {
+            //update data to delete
+            Bap::where('id', $id)->delete();
+
+            //redirect to index
+            return redirect('/bap/' . 1)->with(['success' => 'Berhasil Menghapus BAP']);
+        } catch (Exception $e) {
+            return redirect('/bap/' . 1)->with(['failed' => 'Gagal Menghapus BAP']);
         }
     }
 }
