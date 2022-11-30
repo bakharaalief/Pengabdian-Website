@@ -43,6 +43,7 @@
                                         <th>Materi</th>
                                         <th>Keterangan</th>
                                         <th>Tanggal</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -51,12 +52,12 @@
                                         <td>{{ $bap->materi }}</td>
                                         <td>{{ $bap->keterangan }}</td>
                                         <td>{{ $bap->tanggal }}</td>
-                                        {{-- <td><a href="/detail-attendance/{{ $attendance->id }}" class="btn btn-info">Detail</a></td>
+                                        {{-- <td><a href="/bap/{{ $class->id }}" class="btn btn-info">Detail</a></td> --}}
                                         <td>
-                                            <button class="btn btn-danger button-Delete" data-id="{{ $attendance->id }}">
+                                            <button class="btn btn-danger button-Delete" data-id="{{ $bap->id }}">
                                                 Delete
                                             </button>
-                                        </td> --}}
+                                        </td>
                                     </tr>
                                     @endforeach                                    
                                 </tbody>
@@ -116,18 +117,20 @@
                             </div>
 
                             <input type="text"
-                            class="form-control"
-                            id="class_id"
-                            value="{{ $class->id }}"
-                            name="class_id"
-                            hidden
+                                class="form-control"
+                                id="class_id"
+                                value="{{ $class->id }}"
+                                name="class_id"
+                                hidden
                             >
                             <input 
                                 menu="text" 
                                 class="form-control" 
                                 id="guru_id" 
-                                value="{{ $guru->id }}"
-                                name="guru_id" hidden>
+                                {{-- value="{{ $baps->guru }}" --}}
+                                value="1"
+                                name="guru_id" 
+                                hidden>
                         </div>
 
                         <div class="modal-footer justify-content-between">

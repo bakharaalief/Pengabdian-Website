@@ -24,4 +24,9 @@ class Bap extends Model
     {
         return $this->belongsTo(User::class, 'users', 'id');
     }
+
+    public function classes() 
+    {
+        return $this->belongsTo(Kelas::class, 'classes', 'id');
+    }
 }
