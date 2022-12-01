@@ -3,7 +3,6 @@
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\AttendanceStudentController;
 use App\Http\Controllers\BapController;
-use App\Http\Controllers\AttendanceStudentController;
 use App\Http\Controllers\ClassController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NormalController;

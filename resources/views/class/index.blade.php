@@ -47,8 +47,6 @@
                                             <th>Tahun Ajaran</th>
                                             <th>Murid</th>
                                             <th>Absen</th>
-                                            <th>Murid</th>
-                                            <th>Absen</th>
                                             <th>Edit</th>
                                             <th>Delete</th>
                                         </tr>

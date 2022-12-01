@@ -41,9 +41,7 @@ class BapController extends Controller
                 'guru' => $request['guru_id'],
                 'class_id' => $request['class_id']
             ]);
-
             
-
             return redirect('/bap/' . $request['class_id'])->with(['success' => 'Bap Berhasil Ditambah']);
         } catch (Exception $e) {
             return redirect('/bap/' . $request['class_id'])->with(['failed' => 'Bap Gagal Ditambah']);
