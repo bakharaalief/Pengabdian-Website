@@ -3,6 +3,7 @@
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\AttendanceStudentController;
 use App\Http\Controllers\BapController;
+use App\Http\Controllers\AttendanceStudentController;
 use App\Http\Controllers\ClassController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NormalController;
@@ -47,6 +48,10 @@ Route::resource('/attendance', AttendanceController::class)->middleware(['isAdmi
 
 // bap route
 Route::resource('/bap', BapController::class)->middleware(['isAdmin', 'auth']);
+
+// attendance students route
+Route::resource('/detail-attendance', AttendanceStudentController::class)->middleware(['isGuru', 'auth']);
+Route::get('/detail-attendance-form/{id}', [AttendanceStudentController::class, 'showForm'])->middleware(['isGuru', 'auth']);
 
 // attendance students route
 Route::resource('/detail-attendance', AttendanceStudentController::class)->middleware(['isGuru', 'auth']);
