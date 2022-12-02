@@ -18,12 +18,12 @@ class CheckUserGuru
     public function handle(Request $request, Closure $next)
     {
         // if user level is admin
-        if (Auth::user() && Auth::user()->user_level == 1) {
+        if (Auth::user() && Auth::user()->user_level === 1) {
             return $next($request);
         } 
 
         // if user level is guru
-        else if (Auth::user() && Auth::user()->user_level == 2) {
+        else if (Auth::user() && Auth::user()->user_level === 2) {
             return $next($request);
         }
 

@@ -19,20 +19,20 @@ class CheckUserSukarelawan
     {
 
         // if user level is admin
-        if (Auth::user() && Auth::user()->level == 1) {
+        if (Auth::user() && Auth::user()->user_level === 1) {
             return $next($request);
         } 
 
         // if user level is guru
-        else if (Auth::user() && Auth::user()->level == 2) {
+        else if (Auth::user() && Auth::user()->user_level === 2) {
             return $next($request);
         }
 
         // if user level is sukarelawan
-        else if (Auth::user() && Auth::user()->level == 3) {
+        else if (Auth::user() && Auth::user()->user_level === 3) {
             return $next($request);
         }
 
-        return redirect('normal.home');
+        return redirect()->route('normal.home');
     }
 }
