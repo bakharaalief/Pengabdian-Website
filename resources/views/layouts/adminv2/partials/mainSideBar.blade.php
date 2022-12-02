@@ -1,3 +1,8 @@
+
+@php
+    $level = Auth::user()->user_level
+@endphp
+
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
 
@@ -21,20 +26,24 @@
                 </li>
 
                 <!-- user button -->
+                @if($level == 1)
                 <li class="nav-item">
                     <a href="{{ route('user.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-lg fa-user mr-3"></i>
                         <p>User</p>
                     </a>
                 </li>
+                @endif
 
                 <!-- murid button -->
+                @if($level != 3)
                 <li class="nav-item">
                     <a href="{{ route('student.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-lg fa-users mr-2"></i>
                         <p>Murid</p>
                     </a>
                 </li>
+                @endif
 
                 <!-- kelas button -->
                 <li class="nav-item">

@@ -37,25 +37,25 @@ Route::resource('/user', UserController::class)->middleware(['isAdmin', 'auth'])
 Route::resource('/student', StudentController::class)->middleware(['isGuru', 'auth']);
 
 //class route
-Route::resource('/class', ClassController::class)->middleware(['isGuru', 'auth']);
+Route::resource('/class', ClassController::class)->middleware(['isSukarelawan', 'auth']);
 
 //class route
-Route::resource('/detail-class', StudentClassController::class)->middleware(['isGuru', 'auth']);
+Route::resource('/detail-class', StudentClassController::class)->middleware(['isSukarelawan', 'auth']);
 
 // attendance route
-Route::resource('/attendance', AttendanceController::class)->middleware(['isAdmin', 'auth']);
+Route::resource('/attendance', AttendanceController::class)->middleware(['isSukarelawan', 'auth']);
 
 // bap route
-Route::resource('/bap', BapController::class)->middleware(['isGuru', 'auth']);
-Route::get('/bap-form/{id}', [BapController::class, 'showForm'])->middleware(['isGuru', 'auth']);
+Route::resource('/bap', BapController::class)->middleware(['isSukarelawan', 'auth']);
+Route::get('/bap-form/{id}', [BapController::class, 'showForm'])->middleware(['isSukarelawan', 'auth']);
 
 // attendance students route
-Route::resource('/detail-attendance', AttendanceStudentController::class)->middleware(['isGuru', 'auth']);
-Route::get('/detail-attendance-form/{id}', [AttendanceStudentController::class, 'showForm'])->middleware(['isGuru', 'auth']);
+Route::resource('/detail-attendance', AttendanceStudentController::class)->middleware(['isSukarelawan', 'auth']);
+Route::get('/detail-attendance-form/{id}', [AttendanceStudentController::class, 'showForm'])->middleware(['isSukarelawan', 'auth']);
 
 // attendance students route
-Route::resource('/detail-attendance', AttendanceStudentController::class)->middleware(['isGuru', 'auth']);
-Route::get('/detail-attendance-form/{id}', [AttendanceStudentController::class, 'showForm'])->middleware(['isGuru', 'auth']);
+Route::resource('/detail-attendance', AttendanceStudentController::class)->middleware(['isSukarelawan', 'auth']);
+Route::get('/detail-attendance-form/{id}', [AttendanceStudentController::class, 'showForm'])->middleware(['isSukarelawan', 'auth']);
 
 Auth::routes();
 
