@@ -47,4 +47,8 @@ class User extends Authenticatable
     {
         return $this->belongsTo(UserLevel::class, 'user_level', 'id');
     }
+
+    public function baps() {
+        return $this->hasMany(Bap::class, 'guru');
+    }
 }

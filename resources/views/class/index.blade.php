@@ -47,6 +47,7 @@
                                             <th>Tahun Ajaran</th>
                                             <th>Murid</th>
                                             <th>Absen</th>
+                                            <th>BAP</th>
                                             <th>Edit</th>
                                             <th>Delete</th>
                                         </tr>
@@ -62,6 +63,9 @@
                                             </td>
                                             <td>
                                                 <a href="/attendance/{{ $class->id }}" class="btn btn-info">Absen</a>
+                                            </td>
+                                            <td>
+                                                <a href="/bap/{{ $class->id }}" class="btn btn-info">BAP</a>
                                             </td>
                                             <td>
                                                 <button class="btn btn-warning button-Edit" data-id="{{ $class->id }}">
