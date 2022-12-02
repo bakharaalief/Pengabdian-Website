@@ -18,16 +18,16 @@ class CreateBapsTable extends Migration
             $table->string('materi');
             $table->text('keterangan');
             $table->date('tanggal');
-            $table->foreignId('guru')
+            $table->foreignId('user')
                     ->references('id')
                     ->on('users')
                     ->onUpdate('cascade')
-                    ->onDelete('cascade');
+                    ->onDelete('restrict');
             $table->foreignId('class_id')
                     ->references('id')
                     ->on('classes')
                     ->onUpdate('cascade')
-                    ->onDelete('cascade');
+                    ->onDelete('restrict');
             $table->timestamps();
         });
     }

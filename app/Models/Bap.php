@@ -16,13 +16,13 @@ class Bap extends Model
         'materi',
         'keterangan',
         'tanggal',
-        'guru',
+        'user',
         'class_id'
     ];
 
-    public function users()
+    public function getUser()
     {
-        return $this->belongsTo(User::class, 'users', 'id');
+        return $this->belongsTo(User::class, 'user', 'id');
     }
 
     public function classes() 

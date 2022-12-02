@@ -20,7 +20,7 @@ class CreateAttendanceTable extends Migration
             ->references('id')
             ->on('classes')
             ->onUpdate('cascade')
-            ->onDelete('cascade');
+            ->onDelete('restrict');
             $table->timestamps();
         });
     }

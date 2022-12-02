@@ -46,7 +46,8 @@ Route::resource('/detail-class', StudentClassController::class)->middleware(['is
 Route::resource('/attendance', AttendanceController::class)->middleware(['isAdmin', 'auth']);
 
 // bap route
-Route::resource('/bap', BapController::class)->middleware(['isAdmin', 'auth']);
+Route::resource('/bap', BapController::class)->middleware(['isGuru', 'auth']);
+Route::get('/bap-form/{id}', [BapController::class, 'showForm'])->middleware(['isGuru', 'auth']);
 
 // attendance students route
 Route::resource('/detail-attendance', AttendanceStudentController::class)->middleware(['isGuru', 'auth']);
