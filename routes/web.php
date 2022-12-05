@@ -53,10 +53,6 @@ Route::get('/bap-form/{id}', [BapController::class, 'showForm'])->middleware(['i
 Route::resource('/detail-attendance', AttendanceStudentController::class)->middleware(['isSukarelawan', 'auth']);
 Route::get('/detail-attendance-form/{id}', [AttendanceStudentController::class, 'showForm'])->middleware(['isSukarelawan', 'auth']);
 
-// attendance students route
-Route::resource('/detail-attendance', AttendanceStudentController::class)->middleware(['isSukarelawan', 'auth']);
-Route::get('/detail-attendance-form/{id}', [AttendanceStudentController::class, 'showForm'])->middleware(['isSukarelawan', 'auth']);
-
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('admin.home');

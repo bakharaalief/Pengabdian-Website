@@ -1,4 +1,3 @@
-
 @php
     $level = Auth::user()->user_level
 @endphp

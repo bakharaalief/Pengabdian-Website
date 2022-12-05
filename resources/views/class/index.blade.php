@@ -1,3 +1,7 @@
+@php
+    $level = Auth::user()->user_level
+@endphp
+
 @extends('layouts.adminv2.adminApp')
 
 @section('content')
@@ -32,10 +36,12 @@
                         <div class="card">
                             <div class="card-header">
                                 <div class="card-tools">
+                                    @if($level != 3)
                                     <button class="btn btn-success" data-toggle="modal" data-target="#modal-default">
                                         <i class="fa fa-plus pr-1" aria-hidden="true"></i>
                                         Tambah
                                     </button>
+                                    @endif
                                 </div>
                             </div>
                             <div class="card-body">
@@ -48,8 +54,11 @@
                                             <th>Murid</th>
                                             <th>Absen</th>
                                             <th>BAP</th>
+
+                                            @if($level != 3)
                                             <th>Edit</th>
                                             <th>Delete</th>
+                                            @endif
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -67,6 +76,8 @@
                                             <td>
                                                 <a href="/bap/{{ $class->id }}" class="btn btn-info">BAP</a>
                                             </td>
+
+                                            @if($level != 3)
                                             <td>
                                                 <button class="btn btn-warning button-Edit" data-id="{{ $class->id }}">
                                                     Edit
@@ -77,6 +88,7 @@
                                                     Delete
                                                 </button>
                                             </td>
+                                            @endif
                                         </tr>
                                         @endforeach
                                     </tbody>
