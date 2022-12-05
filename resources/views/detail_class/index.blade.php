@@ -1,3 +1,7 @@
+@php
+    $level = Auth::user()->user_level
+@endphp
+
 @extends('layouts.adminv2.adminApp')
 
 @section('content')
@@ -31,12 +35,14 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
+                                @if($level != 3)
                                 <div class="card-tools">
                                     <button class="btn btn-success" data-toggle="modal" data-target="#modal-default">
                                         <i class="fa fa-plus pr-1" aria-hidden="true"></i>
                                         Tambah
                                     </button>
                                 </div>
+                                @endif
                             </div>
                             <div class="card-body">
                                 <table id="example2" class="table table-bordered table-hover">
@@ -46,7 +52,10 @@
                                             <th>Gender</th>
                                             <th>Semester</th>
                                             <th>Sekolah</th>
+
+                                            @if($level != 3)
                                             <th>Delete</th>
+                                            @endif
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -56,11 +65,14 @@
                                             <td>{{ $studentClass->getStudent->gender }}</td>
                                             <td>{{ $studentClass->getStudent->semester }}</td>
                                             <td>{{ $studentClass->getStudent->school }}</td>
+
+                                            @if($level != 3)
                                             <td>
                                                 <button class="btn btn-danger button-Delete" data-id="{{ $studentClass->id }}">
                                                     Delete
                                                 </button>
                                             </td>
+                                            @endif
                                         </tr>
                                         @endforeach
                                     </tbody>
