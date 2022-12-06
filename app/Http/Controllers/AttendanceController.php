@@ -44,7 +44,7 @@ class AttendanceController extends Controller
             foreach($students as $student){
                 $attendanceData[] = [
                     'attendance_id' => $attendanceId,
-                    'student_id' => $student->id,
+                    'student_id' => $student->student,
                     'status' => 0,
                     'created_at' => $mytime,
                     'updated_at' =>$mytime
