@@ -19,12 +19,12 @@ class CreateAttendanceStudentsTable extends Migration
                 ->references('id')
                 ->on('attendance')
                 ->onUpdate('cascade')
-                ->onDelete('cascade');
+                ->onDelete('restrict');
             $table->foreignId('student_id')
                 ->references('id')
                 ->on('students')
                 ->onUpdate('cascade')
-                ->onDelete('cascade');
+                ->onDelete('restrict');
             $table->integer('status');
             $table->timestamps();
         });

@@ -76,6 +76,7 @@ class AttendanceController extends Controller
         $attendances =  Attendance::where('id', $id)->first();
         
         try {
+            AttendanceStudent::where("attendance_id", $id)->delete();
             Attendance::where('id', $id)->delete();
 
             //redirect to index
