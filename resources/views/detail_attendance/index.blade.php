@@ -133,6 +133,7 @@
         "autoWidth": false,
         "searching": false,
         "ordering": false,
+        "paging": false,
         // "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
       })
       .buttons()

@@ -42,7 +42,7 @@
                                     <tr>
                                         <th>Materi</th>
                                         <th>Pengisi</th>
-                                        <th>Keterangan</th>
+                                        <th>Deskripsi</th>
                                         <th>Tanggal</th>
                                         <th>Edit</th>
                                         <th>Delete</th>
@@ -251,6 +251,7 @@
         "autoWidth": false,
         "searching": false,
         "ordering": false,
+        "paging": false,
         // "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
       })
       .buttons()
